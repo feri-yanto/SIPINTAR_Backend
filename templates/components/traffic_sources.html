@@ -1,0 +1,27 @@
+<div class="card card-border bg-base-100 h-full">
+  <div class="card-body">
+    <h2 class="card-title">Sumber Trafik</h2>
+    <p class="text-sm opacity-60">Asal pengunjung bulan ini.</p>
+
+    <div class="flex justify-center py-4">
+      <div class="radial-progress text-primary" style="--value:{{ goal.percent }}; --size:9rem; --thickness:0.7rem;" aria-valuenow="{{ goal.percent }}" role="progressbar">
+        <div class="text-center">
+          <div class="text-2xl font-bold">{{ goal.percent }}%</div>
+          <div class="text-xs opacity-60">dari target</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-3">
+      {% for t in traffic %}
+      <div>
+        <div class="flex justify-between text-sm mb-1">
+          <span>{{ t.name }}</span>
+          <span class="opacity-60">{{ t.percent }}%</span>
+        </div>
+        <progress class="progress progress-{{ t.color }} w-full" value="{{ t.percent }}" max="100"></progress>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

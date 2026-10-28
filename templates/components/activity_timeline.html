@@ -1,0 +1,22 @@
+<div class="card card-border bg-base-100 h-full">
+  <div class="card-body">
+    <h2 class="card-title">Aktivitas</h2>
+    <p class="text-sm opacity-60 mb-2">Riwayat kejadian terbaru.</p>
+
+    <ul class="timeline timeline-vertical timeline-compact timeline-snap-icon">
+      {% for a in activities %}
+      <li>
+        {% if not forloop.first %}<hr class="bg-base-300">{% endif %}
+        <div class="timeline-middle">
+          <span class="status status-{{ a.color }} size-3"></span>
+        </div>
+        <div class="timeline-end timeline-box bg-base-200 border-base-300 mb-3 w-full">
+          <div class="text-sm font-medium">{{ a.title }}</div>
+          <div class="text-xs opacity-60">{{ a.time }}</div>
+        </div>
+        {% if not forloop.last %}<hr class="bg-base-300">{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

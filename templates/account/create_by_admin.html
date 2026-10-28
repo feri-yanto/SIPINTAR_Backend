@@ -1,0 +1,30 @@
+{% extends '../layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="max-w-280 grid grid-cols-12 auto-rows-min gap-5 p-5 bg-white border border-slate-200 rounded-xl xl:mx-auto">
+    <div class="col-span-12 md:col-span-6">
+      <h5 class="text-lg font-medium">Data Kredensial</h5>
+      <p class="text-sm text-slate-400">Data sensitif seperti nama, sandi & email</p>
+    </div>
+    <div class="col-span-12 md:col-span-6">
+      <div class="flex flex-wrap gap-3">
+        <div class="flex-1 basis-55 flex flex-col gap-2">
+          <label for="id_username" class="text-sm font-medium">Nama Pengguna</label>
+          <input type="text" name="username" id="id_username" placeholder="feri_i7i7" class="w-full h-9 px-3 py-2 rounded-lg text-sm outline-none border border-slate-300 focus-visible:border-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700/25 transition-colors">
+        </div>
+        <div class="flex-1 basis-55 flex flex-col gap-2">
+          <label for="id_email" class="text-sm font-medium">Email</label>
+          <input type="email" name="email" id="id_email" placeholder="Email anda" class="w-full h-9 px-3 py-2 rounded-lg text-sm outline-none border border-slate-300 focus-visible:border-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700/25 transition-colors">
+        </div>
+        <div class="flex-1 basis-70 flex flex-col gap-2">
+          <label for="id_password" class="text-sm font-medium">Sandi</label>
+          <input type="password" name="password" id="id_password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" class="w-full h-9 px-3 py-2 rounded-lg text-sm outline-none border border-slate-300 focus-visible:border-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700/25 transition-colors">
+        </div>
+      </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 md:col-start-7 text-end">
+      <button type="button" class="btn btn-primary rounded-lg">Simpan</button>
+    </div>
+  </div>
+{% endblock %}

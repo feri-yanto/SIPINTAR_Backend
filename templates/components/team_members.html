@@ -1,0 +1,36 @@
+<div class="card card-border bg-base-100">
+  <div class="card-body">
+    <div class="flex items-center justify-between">
+      <h2 class="card-title">Tim</h2>
+      <div class="avatar-group -space-x-4">
+        {% for m in team|slice:":3" %}
+        <div class="avatar avatar-placeholder">
+          <div class="bg-neutral text-neutral-content w-8"><span class="text-xs">{{ m.name|slice:":1" }}</span></div>
+        </div>
+        {% endfor %}
+        {% if team|length > 3 %}
+        <div class="avatar avatar-placeholder">
+          <div class="bg-base-300 w-8"><span class="text-xs">+{{ team|length|add:"-3" }}</span></div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <ul class="list">
+      {% for m in team %}
+      <li class="list-row items-center px-0">
+        <div class="avatar {% if m.online %}avatar-online{% else %}avatar-offline{% endif %} avatar-placeholder">
+          <div class="bg-neutral text-neutral-content w-10 rounded-full"><span>{{ m.name|slice:":2"|upper }}</span></div>
+        </div>
+        <div>
+          <div class="font-medium">{{ m.name }}</div>
+          <div class="text-xs opacity-60">{{ m.role }}</div>
+        </div>
+        <div class="tooltip tooltip-left" data-tip="Kirim pesan">
+          <button class="btn btn-ghost btn-sm btn-square" aria-label="Kirim pesan">✉</button>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

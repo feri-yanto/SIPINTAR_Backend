@@ -1,0 +1,14 @@
+<div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+  {% for s in stats %}
+  <div class="stats card-border border border-base-300 bg-base-100">
+    <div class="stat">
+      <div class="stat-figure text-base-content/50">
+        <div class="badge badge-soft badge-{{ s.trend_color }} badge-sm">{{ s.trend }}</div>
+      </div>
+      <div class="stat-title">{{ s.title }}</div>
+      <div class="stat-value text-3xl">{{ s.value }}</div>
+      <div class="stat-desc">{{ s.desc }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

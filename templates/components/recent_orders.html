@@ -1,0 +1,37 @@
+<div class="card card-border bg-base-100">
+  <div class="card-body">
+    <div class="flex items-center justify-between gap-2">
+      <div>
+        <h2 class="card-title">Pesanan Terbaru</h2>
+        <p class="text-sm opacity-60">Transaksi terakhir dari pelanggan Anda.</p>
+      </div>
+      <button class="btn btn-sm btn-outline">Lihat semua</button>
+    </div>
+
+    <!-- Tab CSS-only bawaan daisyUI (radio input) -->
+    <div class="tabs tabs-border mt-2">
+      <input type="radio" name="order_tabs" class="tab" aria-label="Semua" checked>
+      <div class="tab-content pt-3">
+        {% include 'dashboard/components/orders_table.html' with orders=orders %}
+      </div>
+
+      <input type="radio" name="order_tabs" class="tab" aria-label="Menunggu">
+      <div class="tab-content pt-3">
+        {% include 'dashboard/components/orders_table.html' with orders=orders_pending %}
+      </div>
+
+      <input type="radio" name="order_tabs" class="tab" aria-label="Selesai">
+      <div class="tab-content pt-3">
+        {% include 'dashboard/components/orders_table.html' with orders=orders_done %}
+      </div>
+    </div>
+
+    <div class="join justify-center mt-2">
+      <button class="join-item btn btn-sm">«</button>
+      <button class="join-item btn btn-sm btn-active">1</button>
+      <button class="join-item btn btn-sm">2</button>
+      <button class="join-item btn btn-sm">3</button>
+      <button class="join-item btn btn-sm">»</button>
+    </div>
+  </div>
+</div>
