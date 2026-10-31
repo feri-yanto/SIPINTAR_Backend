@@ -2,29 +2,109 @@
 {% load static %}
 
 {% block content %}
-  <div class="max-w-280 grid grid-cols-12 auto-rows-min gap-5 p-5 bg-white border border-slate-200 rounded-xl xl:mx-auto">
-    <div class="col-span-12 md:col-span-6">
-      <h5 class="text-lg font-medium">Data Kredensial</h5>
-      <p class="text-sm text-slate-400">Data sensitif seperti nama, sandi & email</p>
-    </div>
-    <div class="col-span-12 md:col-span-6">
-      <div class="flex flex-wrap gap-3">
-        <div class="flex-1 basis-55 flex flex-col gap-2">
-          <label for="id_username" class="text-sm font-medium">Nama Pengguna</label>
-          <input type="text" name="username" id="id_username" placeholder="feri_i7i7" class="w-full h-9 px-3 py-2 rounded-lg text-sm outline-none border border-slate-300 focus-visible:border-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700/25 transition-colors">
-        </div>
-        <div class="flex-1 basis-55 flex flex-col gap-2">
-          <label for="id_email" class="text-sm font-medium">Email</label>
-          <input type="email" name="email" id="id_email" placeholder="Email anda" class="w-full h-9 px-3 py-2 rounded-lg text-sm outline-none border border-slate-300 focus-visible:border-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700/25 transition-colors">
-        </div>
-        <div class="flex-1 basis-70 flex flex-col gap-2">
-          <label for="id_password" class="text-sm font-medium">Sandi</label>
-          <input type="password" name="password" id="id_password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" class="w-full h-9 px-3 py-2 rounded-lg text-sm outline-none border border-slate-300 focus-visible:border-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700/25 transition-colors">
-        </div>
-      </div>
-    </div>
-    <div class="col-span-12 md:col-span-6 md:col-start-7 text-end">
-      <button type="button" class="btn btn-primary rounded-lg">Simpan</button>
+  <div class="flex flex-wrap-reverse items-center justify-between gap-2 mb-5">
+    <h3 class="text-2xl font-semibold basis-70">Pembuatan Akun</h3>
+    <div class="breadcrumbs text-sm">
+      <ul>
+        <li>
+          <a href="{% url 'home' %}" class="[&_svg]:size-4">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0001 1.75C12.7873 1.75 13.4814 2.01975 14.212 2.45996C14.9253 2.88977 15.7402 3.52484 16.7579 4.31641L18.7579 5.87207C20.0268 6.85896 20.8674 7.49024 21.3175 8.41016C21.7675 9.33029 21.7501 10.3817 21.7501 11.9893V14.5C21.7501 16.1287 21.7518 17.4257 21.6153 18.4404C21.476 19.4767 21.1801 20.3298 20.505 21.0049C19.8299 21.68 18.9768 21.9759 17.9405 22.1152C16.9259 22.2516 15.6288 22.25 14.0001 22.25H10.0001C8.37142 22.25 7.07433 22.2517 6.05966 22.1152C5.02345 21.9759 4.17032 21.68 3.49521 21.0049C2.82011 20.3298 2.52418 19.4767 2.38486 18.4404C2.28254 17.6794 2.25799 16.7596 2.25204 15.6602L2.25009 14.5V11.9893C2.25009 10.3817 2.2327 9.33028 2.68271 8.41016C3.13281 7.49024 3.97344 6.85894 5.24228 5.87207L7.24228 4.31641C8.26 3.52485 9.07485 2.88977 9.78818 2.45996C10.5188 2.01974 11.2129 1.75002 12.0001 1.75ZM12.0001 3.25C11.5866 3.25002 11.1641 3.38176 10.5626 3.74414C9.94354 4.11715 9.20975 4.68697 8.16318 5.50098L6.16318 7.05566C4.77819 8.13287 4.29113 8.5342 4.02939 9.06934C3.76768 9.60446 3.75009 10.2348 3.75009 11.9893V14.5C3.75009 16.1709 3.75137 17.3488 3.87118 18.2402C3.98814 19.1101 4.20579 19.5944 4.55575 19.9443C4.90573 20.2943 5.38998 20.5119 6.25986 20.6289C7.15131 20.7487 8.32922 20.75 10.0001 20.75H14.0001C15.671 20.75 16.8489 20.7487 17.7403 20.6289C18.6102 20.512 19.0945 20.2943 19.4444 19.9443C19.7944 19.5944 20.012 19.1102 20.129 18.2402C20.2488 17.3488 20.2501 16.1709 20.2501 14.5V11.9893C20.2501 10.2348 20.2325 9.60447 19.9708 9.06934C19.7091 8.53421 19.222 8.13288 17.837 7.05566L15.837 5.50098C14.7904 4.68697 14.0567 4.11714 13.4376 3.74414C12.8361 3.38176 12.4136 3.25 12.0001 3.25ZM17.0001 12.75C17.4143 12.75 17.7501 13.0858 17.7501 13.5V17.5C17.7501 17.9142 17.4143 18.25 17.0001 18.25C16.5859 18.25 16.2501 17.9142 16.2501 17.5V13.5C16.2501 13.0858 16.5859 12.75 17.0001 12.75Z" fill="currentColor"></path>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="">Akun</a>
+        </li>
+        <li>Buat baru</li>
+      </ul>
     </div>
   </div>
+  <form method="post" class="max-w-360 grid grid-cols-12 auto-rows-min gap-4 p-5 rounded-xl border border-border bg-background xl:mx-auto">
+    {% csrf_token %}
+    <div class="col-span-12 md:col-span-6 xl:col-span-5">
+      <legend class="font-semibold">Data Kredensial</legend>
+      <p class="text-sm text-gray-400 font-light">Data sensitif untuk masuk ke dalam sistem</p>
+      {{ account_form.role }}
+    </div>
+    <div class="flex flex-wrap gap-3 col-span-12 md:col-span-6 xl:col-span-7">
+      <div class="flex-1 basis-65 flex flex-col gap-1">
+        <label for="id_username" class="text-sm font-medium">NIP</label>
+        {{ account_form.username }}
+        {% if account_form.username.errors %}
+          <ul class="text-sm text-error list-disc list-inside">
+            {% for error in account_form.username.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="flex-1 basis-65 flex flex-col gap-1">
+        <label for="id_email" class="text-sm font-medium">Email</label>
+        {{ account_form.email }}
+        {% if account_form.email.errors %}
+          <ul class="text-sm text-error list-disc list-inside">
+            {% for error in account_form.email.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="flex-1 basis-full flex flex-col gap-1">
+        <label for="id_password" class="text-sm font-medium">Kata Sandi</label>
+        {{ account_form.password }}
+        {% if account_form.password.errors %}
+          <ul class="text-sm text-error list-disc list-inside">
+            {% for error in account_form.password.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+    <hr class="col-span-12 border-border my-3" />
+    <div class="col-span-12 md:col-span-6 xl:col-span-5">
+      <legend class="font-semibold">Profil Pribadi</legend>
+      <p class="text-sm text-gray-400 font-light">Data menyangkut biodata dan data ASN</p>
+    </div>
+    <div class="flex flex-wrap gap-3 col-span-12 md:col-span-6 xl:col-span-7">
+      <div class="flex-1 basis-65 flex flex-col gap-1">
+        <label for="{{ profile_form.first_name.id_for_label }}" class="text-sm font-medium">Nama Depan</label>
+        {{ profile_form.first_name }}
+      </div>
+      <div class="flex-1 basis-65 flex flex-col gap-1">
+        <label for="{{ profile_form.last_name.id_for_label }}" class="text-sm font-medium">Nama Belakang <small class="italic text-blue-500">[Opsional]</small></label>
+        {{ profile_form.last_name }}
+      </div>
+      <div class="flex-1 basis-65 flex flex-col gap-1">
+        <label for="{{ profile_form.first_title.id_for_label }}" class="text-sm font-medium">Gelar Depan <small class="italic text-blue-500">[Opsional]</small></label>
+        {{ profile_form.first_title }}
+      </div>
+      <div class="flex-1 basis-65 flex flex-col gap-1">
+        <label for="{{ profile_form.last_title.id_for_label }}" class="text-sm font-medium">Gelar Belakang <small class="italic text-blue-500">[Opsional]</small></label>
+        {{ profile_form.last_title }}
+      </div>
+      <div class="flex-1 basis-65 flex flex-col gap-1">
+        <label for="{{ profile_form.level.id_for_label }}" class="text-sm font-medium">Golongan</label>
+        <select name="{{ profile_form.level.name }}" id="{{ profile_form.level.id_for_label }}" class="select w-full h-10 px-3 py-2 rounded-lg text-sm bg-background border border-border outline-0 shadow-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 open:border-blue-500 open:ring-2 open:ring-blue-500/20">
+          <option disabled selected>Pilih golongan</option>
+          {% for value, label in profile_form.level.field.choices %}
+            <option value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="flex-1 basis-65 flex flex-col gap-1">
+        <label for="{{ profile_form.position.id_for_label }}" class="text-sm font-medium">Jabatan</label>
+        {{ profile_form.position }}
+      </div>
+    </div>
+    <hr class="col-span-12 border-border my-3" />
+    <div class="col-span-12 md:col-span-6 md:col-start-7 text-end">
+      <button type="submit" class="btn btn-active btn-primary rounded-lg border-0 outline-0 bg-blue-500 text-white hover:bg-blue-600 [&_svg]:size-5">
+        Simpan <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none">
+          <path d="M12.3965 18.4438C12.6421 18.7773 13.1108 18.8485 13.4443 18.603H13.4453L13.4463 18.602C13.4472 18.6014 13.4489 18.6001 13.4502 18.5991C13.4533 18.5968 13.4583 18.5934 13.4639 18.5893C13.4757 18.5806 13.4935 18.5678 13.5156 18.5513C13.5608 18.5176 13.6268 18.4676 13.71 18.4048C13.8767 18.2788 14.1149 18.0975 14.3994 17.8755C14.9681 17.4316 15.7294 16.821 16.4922 16.1587C17.2514 15.4995 18.0304 14.774 18.625 14.1011C18.9215 13.7655 19.1882 13.4242 19.3848 13.0981C19.5688 12.7927 19.75 12.4057 19.75 11.9995C19.75 11.5932 19.5689 11.2063 19.3848 10.9009C19.1882 10.5747 18.9216 10.2336 18.625 9.89795C18.0304 9.22497 17.2514 8.49954 16.4922 7.84033C15.7292 7.17784 14.9672 6.5674 14.3984 6.12353C14.114 5.90153 13.8766 5.72014 13.71 5.59424C13.6267 5.53133 13.5608 5.4814 13.5156 5.44775C13.4934 5.43116 13.4758 5.41847 13.4639 5.40967C13.4583 5.40551 13.4533 5.40221 13.4502 5.3999C13.4488 5.39887 13.4472 5.39762 13.4463 5.39697L13.4453 5.39599H13.4443C13.1109 5.15051 12.6422 5.22193 12.3965 5.55517C12.1509 5.88869 12.2222 6.35742 12.5557 6.60303C12.5563 6.60345 12.5575 6.60514 12.5586 6.60596C12.5611 6.60784 12.5652 6.61098 12.5703 6.61474C12.5811 6.62273 12.5979 6.63505 12.6191 6.65088C12.6618 6.68269 12.7252 6.72978 12.8057 6.79053C12.967 6.91241 13.1989 7.0895 13.4766 7.30615C14.0327 7.74018 14.7721 8.33356 15.5088 8.97314C16.249 9.61587 16.9699 10.2913 17.5 10.8911C17.6113 11.0171 17.7103 11.1378 17.7988 11.2505H5C4.58579 11.2505 4.25 11.5863 4.25 12.0005C4.25022 12.4145 4.58593 12.7505 5 12.7505H17.7969C17.7089 12.8622 17.6105 12.9818 17.5 13.1069C16.9699 13.7069 16.2492 14.383 15.5088 15.0259C14.7722 15.6654 14.0327 16.2588 13.4766 16.6929C13.199 16.9094 12.967 17.0866 12.8057 17.2085C12.7253 17.2691 12.6618 17.3163 12.6191 17.3481C12.5982 17.3638 12.5821 17.3763 12.5713 17.3843C12.5661 17.3881 12.5613 17.3911 12.5586 17.3931C12.5576 17.3938 12.5563 17.3946 12.5557 17.395C12.2222 17.6406 12.151 18.1103 12.3965 18.4438Z" fill="currentColor"></path>
+        </svg>
+      </button>
+    </div>
+  </form>
 {% endblock %}
