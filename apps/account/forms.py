@@ -32,7 +32,10 @@ class RegisterAccountForms(forms.ModelForm):
         'placeholder': 'emailanda@contoh.com',
         'class': 'h-10 px-3 py-2 rounded-lg text-sm bg-transparent border border-border outline-0 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20'
       }),
-      'role': forms.RadioSelect()
+      'role': forms.RadioSelect(attrs={
+        'hidden': True,
+        'class': 'peer'
+      })
     }
 
   def clean_username(self):
