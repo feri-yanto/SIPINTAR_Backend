@@ -1,0 +1,36 @@
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
+  <style type="text/tailwindcss">
+    @theme {
+      --font-outfit: 'Outfit', sans-serif;
+      --color-background: var(--background);
+      --color-foreground: var(--foreground);
+      --color-sub-text: var(--sub-text);
+      --color-border: var(--border);
+    }
+    
+    :root {
+      --background: rgb(255, 255, 255);
+      --foreground: oklch(27.8% 0.033 256.848);
+      --border: oklch(92.8% 0.006 264.531);
+      --sub-text: oklch(70.7% 0.022 261.325);
+    }
+  </style>
+
+  {% block extra_head %}
+
+  {% endblock %}
+</head>

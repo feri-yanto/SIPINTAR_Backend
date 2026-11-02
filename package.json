@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./static/css/app.css -o ./static/css/global.css"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "daisyui": "^5.7.50",
+    "tailwindcss": "^4.3.3"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.5.1": true
+  }
+}

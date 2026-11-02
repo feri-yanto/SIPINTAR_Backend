@@ -1,0 +1,54 @@
+{% extends '../layouts/base.html' %}
+{% load static %}
+
+{% block content_wrapper %}
+  <div class="w-full h-dvh flex items-center justify-center">
+    <div class="basis-5/6 max-w-md flex flex-col gap-y-4 p-5 rounded-xl bg-background border border-border">
+      <div class="text-center">
+        <h1 class="text-3xl font-semibold">Login</h1>
+        <p class="font-light">Hallo, selamat datang kembali! &#128075;</p>
+      </div>
+      <div>
+        <button type="button" class="w-full h-10 flex items-center justify-center gap-x-2 text-sm border border-border rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
+          <img src="{% static 'assets/images/google.svg' %}" alt="google icon" class="size-4" />
+          <span>Masuk dengan Google</span>
+        </button>
+      </div>
+      <div class="divider text-sm text-gray-400 before:h-px after:h-px">Atau masuk dengan NIP</div>
+      <form method="post" class="flex flex-col gap-y-4">
+        {% csrf_token %}
+        <div class="flex flex-col gap-y-1">
+          <label for="{{ form.username.id_for_label }}" class="text-sm font-medium">NIP</label>
+          {{ form.username }}
+        </div>
+
+        <div class="flex flex-col gap-y-1">
+          <label for="{{ form.password.id_for_label }}" class="text-sm font-medium">Sandi</label>
+          {{ form.password }}
+          <a class="ml-auto text-sm text-blue-500">Lupa sandi?</a>
+        </div>
+        <div>
+          <button type="submit" class="w-full btn btn-active btn-primary rounded-lg border-none bg-blue-500 text-white">Masuk</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block inner_toast %}
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      <div class="my-toast w-75 min-h-10 flex flex-wrap gap-x-3 p-2 rounded-lg bg-background text-foreground shadow-lg border-0">
+        <div class="rounded-full bg-error text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8V12"></path>
+            <path d="M12.125 15.75H12M12.25 15.75C12.25 15.8881 12.1381 16 12 16C11.8619 16 11.75 15.8881 11.75 15.75C11.75 15.6119 11.8619 15.5 12 15.5C12.1381 15.5 12.25 15.6119 12.25 15.75Z"></path>
+          </svg>
+        </div>
+        <h6>Kesalahan</h6>
+        <p class="basis-full ml-9 text-sm text-gray-400 font-light">{{ error }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
