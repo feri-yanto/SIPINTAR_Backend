@@ -1,0 +1,76 @@
+{% extends '../layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="max-w-300 mx-auto">
+    <div class="flex flex-wrap-reverse items-center justify-between mb-6">
+      <h3 class="text-2xl font-semibold basis-3xs">Manajemen Akun</h3>
+
+      <div class="breadcrumbs text-sm">
+        <ul>
+          <li>
+            <a href="{% url 'home' %}" class="[&>svg]:size-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0001 1.75C12.7873 1.75 13.4814 2.01975 14.212 2.45996C14.9253 2.88977 15.7402 3.52484 16.7579 4.31641L18.7579 5.87207C20.0268 6.85896 20.8674 7.49024 21.3175 8.41016C21.7675 9.33029 21.7501 10.3817 21.7501 11.9893V14.5C21.7501 16.1287 21.7518 17.4257 21.6153 18.4404C21.476 19.4767 21.1801 20.3298 20.505 21.0049C19.8299 21.68 18.9768 21.9759 17.9405 22.1152C16.9259 22.2516 15.6288 22.25 14.0001 22.25H10.0001C8.37142 22.25 7.07433 22.2517 6.05966 22.1152C5.02345 21.9759 4.17032 21.68 3.49521 21.0049C2.82011 20.3298 2.52418 19.4767 2.38486 18.4404C2.28254 17.6794 2.25799 16.7596 2.25204 15.6602L2.25009 14.5V11.9893C2.25009 10.3817 2.2327 9.33028 2.68271 8.41016C3.13281 7.49024 3.97344 6.85894 5.24228 5.87207L7.24228 4.31641C8.26 3.52485 9.07485 2.88977 9.78818 2.45996C10.5188 2.01974 11.2129 1.75002 12.0001 1.75ZM12.0001 3.25C11.5866 3.25002 11.1641 3.38176 10.5626 3.74414C9.94354 4.11715 9.20975 4.68697 8.16318 5.50098L6.16318 7.05566C4.77819 8.13287 4.29113 8.5342 4.02939 9.06934C3.76768 9.60446 3.75009 10.2348 3.75009 11.9893V14.5C3.75009 16.1709 3.75137 17.3488 3.87118 18.2402C3.98814 19.1101 4.20579 19.5944 4.55575 19.9443C4.90573 20.2943 5.38998 20.5119 6.25986 20.6289C7.15131 20.7487 8.32922 20.75 10.0001 20.75H14.0001C15.671 20.75 16.8489 20.7487 17.7403 20.6289C18.6102 20.512 19.0945 20.2943 19.4444 19.9443C19.7944 19.5944 20.012 19.1102 20.129 18.2402C20.2488 17.3488 20.2501 16.1709 20.2501 14.5V11.9893C20.2501 10.2348 20.2325 9.60447 19.9708 9.06934C19.7091 8.53421 19.222 8.13288 17.837 7.05566L15.837 5.50098C14.7904 4.68697 14.0567 4.11714 13.4376 3.74414C12.8361 3.38176 12.4136 3.25 12.0001 3.25ZM17.0001 12.75C17.4143 12.75 17.7501 13.0858 17.7501 13.5V17.5C17.7501 17.9142 17.4143 18.25 17.0001 18.25C16.5859 18.25 16.2501 17.9142 16.2501 17.5V13.5C16.2501 13.0858 16.5859 12.75 17.0001 12.75Z" fill="currentColor"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'account:list' %}">Akun</a>
+          </li>
+          <li>{{ object.first_name|title }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <form method="post" class="flex flex-col gap-y-5 p-5 rounded-xl bg-background border border-border">
+      {% csrf_token %}
+      <div>
+        <legend class="font-semibold">Profil Pribadi</legend>
+        <p class="text-sm text-gray-400 font-light">Data menyangkut biodata dan data ASN</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <div class="flex-1 basis-65 flex flex-col gap-2">
+          <label for="{{ form.first_name.id_for_label }}" class="text-sm font-medium">Nama Depan</label>
+          {{ form.first_name }}
+        </div>
+        <div class="flex-1 basis-65 flex flex-col gap-2">
+          <label for="{{ form.last_name.id_for_label }}" class="text-sm font-medium">Nama Belakang <small class="italic text-blue-500">[Opsional]</small></label>
+          {{ form.last_name }}
+        </div>
+        <div class="flex-1 basis-65 flex flex-col gap-2">
+          <label for="{{ form.first_title.id_for_label }}" class="text-sm font-medium">Gelar Depan <small class="italic text-blue-500">[Opsional]</small></label>
+          {{ form.first_title }}
+        </div>
+        <div class="flex-1 basis-65 flex flex-col gap-2">
+          <label for="{{ form.last_title.id_for_label }}" class="text-sm font-medium">Gelar Belakang <small class="italic text-blue-500">[Opsional]</small></label>
+          {{ form.last_title }}
+        </div>
+        <div class="flex-1 basis-65 flex flex-col gap-2">
+          <label for="{{ form.level.id_for_label }}" class="text-sm font-medium">Golongan</label>
+          <select name="{{ form.level.name }}" id="{{ form.level.id_for_label }}" class="select w-full h-10 px-3 py-2 rounded-lg text-sm bg-background border border-border outline-0 shadow-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 open:border-blue-500 open:ring-2 open:ring-blue-500/20">
+            <option disabled>Pilih golongan</option>
+            {% for value, label in form.level.field.choices %}
+              {% if object.level == value %}
+                <option value="{{ value }}" selected>{{ label }}</option>
+              {% else %}
+                <option value="{{ value }}">{{ label }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="flex-1 basis-65 flex flex-col gap-2">
+          <label for="{{ form.position.id_for_label }}" class="text-sm font-medium">Jabatan</label>
+          {{ form.position }}
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <button type="submit" class="btn btn-active btn-primary gap-x-2 rounded-lg border-none bg-blue-500 text-white [&>svg]:size-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11.9854 15.4083L15.2268 19.0936C16.4277 20.4589 17.0282 21.1416 17.6567 20.9754C18.2852 20.8092 18.5008 19.9108 18.9318 18.1138L21.3229 8.1459C21.9868 5.37832 22.3187 3.99454 21.5808 3.312C20.843 2.62947 19.564 3.13725 17.0061 4.15282L5.13876 8.86449C3.09293 9.67674 2.07001 10.0829 2.00507 10.7808C1.99842 10.8522 1.99831 10.9241 2.00474 10.9955C2.06754 11.6937 3.08921 12.1033 5.13255 12.9223C6.05838 13.2934 6.5213 13.479 6.8532 13.8344C6.89052 13.8743 6.9264 13.9157 6.96078 13.9584C7.26658 14.3384 7.39709 14.8371 7.65808 15.8344L8.14653 17.701C8.4005 18.6715 8.52749 19.1568 8.86008 19.223C9.19267 19.2891 9.48225 18.8867 10.0614 18.0819L11.9854 15.4083ZM11.9854 15.4083L11.6676 15.0771C11.3059 14.7001 11.1251 14.5117 11.1251 14.2775C11.1251 14.0433 11.3059 13.8548 11.6676 13.4778L15.2406 9.75409"></path>
+          </svg>Simpan
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
