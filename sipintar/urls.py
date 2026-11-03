@@ -23,4 +23,5 @@ urlpatterns = [
   path('', view=home_view, name='home'),
   path('account/', include('apps.account.urls', namespace='account')),
   path('auth/', include('apps.authentication.urls', namespace='auth')),
+  path('consult/', include('apps.consult.urls', namespace='consult')),
 ]
