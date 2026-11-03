@@ -1,14 +1,21 @@
 <nav class="min-h-16 flex items-center justify-between px-5 py-2 sticky top-0 z-5 bg-background border-b border-border">
   <div>
-    <label for="app-drawer" class="size-10 inline-flex items-center justify-center bg-background border border-border rounded-lg [&_>_svg]:size-4 cursor-pointer hover:bg-gray-100">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none">
-        <defs></defs>
-        <path fill="currentColor" d="M3.25,5 C3.25,4.586 3.586,4.25 4,4.25 L20,4.25 C20.414,4.25 20.75,4.586 20.75,5 C20.75,5.414 20.414,5.75 20,5.75 L4,5.75 C3.586,5.75 3.25,5.414 3.25,5 Z M3.25,12 C3.25,11.586 3.586,11.25 4,11.25 L20,11.25 C20.414,11.25 20.75,11.586 20.75,12 C20.75,12.414 20.414,12.75 20,12.75 L4,12.75 C3.586,12.75 3.25,12.414 3.25,12 Z M4,18.25 L20,18.25 C20.414,18.25 20.75,18.586 20.75,19 C20.75,19.414 20.414,19.75 20,19.75 L4,19.75 C3.586,19.75 3.25,19.414 3.25,19 C3.25,18.586 3.586,18.25 4,18.25 Z"></path>
+    <label for="app-drawer" class="btn btn-square btn-outline rounded-lg border border-border hover:bg-base-200 [&>svg]:size-4">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 5L20 5"></path>
+        <path d="M4 12L20 12"></path>
+        <path d="M4 19L14 19"></path>
       </svg>
     </label>
   </div>
-  <button class="size-10 bg-blue-200 rounded-full" popovertarget="popover-1" style="anchor-name:--anchor-1"></button>
-  <ul class="dropdown menu w-45 mt-2 mr-4 rounded-box bg-background border border-border shadow-lg" popover id="popover-1" style="position-anchor:--anchor-1">
+  <button popovertarget="popover-profile" style="anchor-name:--anchor-profile">
+    <div class="avatar">
+      <div class="w-9 rounded-full ring-2 ring-offset-2 ring-blue-500">
+        <img alt="Tailwind-CSS-Avatar-component" src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+      </div>
+    </div>
+  </button>
+  <ul class="dropdown menu w-45 mt-2 mr-4 rounded-box bg-background border border-border shadow-lg" popover id="popover-profile" style="position-anchor:--anchor-profile">
     <li>
       <a>
         {% if request.user.is_authenticated %}
@@ -25,12 +32,11 @@
     <li>
       <form action="{% url 'auth:logout' %}" method="post" class="auto-cols-fr hover:bg-red-500/10 text-red-500">
         {% csrf_token %}
-        <button type="submit" class="flex items-center gap-x-2 cursor-pointer [&_>_svg]:size-5">
+        <button type="submit" class="flex items-center gap-x-2 cursor-pointer [&>svg]:size-5">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15.5 8.04045C15.4588 6.87972 15.3216 6.15451 14.8645 5.58671C14.2114 4.77536 13.0944 4.52064 10.8605 4.01121L9.85915 3.78286C6.4649 3.00882 4.76777 2.6218 3.63388 3.51317C2.5 4.40454 2.5 6.1257 2.5 9.56803V14.432C2.5 17.8743 2.5 19.5955 3.63388 20.4868C4.76777 21.3782 6.4649 20.9912 9.85915 20.2171L10.8605 19.9888C13.0944 19.4794 14.2114 19.2246 14.8645 18.4133C15.3216 17.8455 15.4588 17.1203 15.5 15.9595"></path>
             <path d="M18.5 9.01172C18.5 9.01172 21.5 11.2212 21.5 12.0117C21.5 12.8023 18.5 15.0117 18.5 15.0117M21 12.0117H8.49998"></path>
-          </svg>
-          <p>Keluar</p>
+          </svg>Keluar
         </button>
       </form>
     </li>
