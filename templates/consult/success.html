@@ -1,0 +1,53 @@
+{% extends '../layouts/base.html' %}
+{% load static %}
+
+{% block content_wrapper %}
+  <header class="bg-linear-to-r from-blue-800 to-blue-500 text-white shadow">
+    <div class="max-w-3xl mx-auto px-4 py-6 flex flex-wrap sm:items-center gap-4 gap-x-6">
+      <div class="size-20 sm:size-23 shrink-0">
+        <img src="{% static 'assets/images/paser.png' %}" alt="paser logo" />
+      </div>
+      <div class="flex-1">
+        <h1 class="text-xl sm:text-2xl font-bold leading-tight">Badan Kepegawaian dan Pengembangan <br /> Sumber Daya Manusia</h1>
+        <p class="text-blue-100 text-sm">Layanan Konsultasi</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-3xl mx-auto p-6">
+    <div class="flex flex-col items-center">
+      <div class="size-15 inline-flex items-center justify-center rounded-full bg-green-200 text-green-600 [&>svg]:size-8">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 13.2592L7.58583 15.9568C8.2525 16.6523 8.58583 17 9.00004 17C9.41425 17 9.74759 16.6523 10.4143 15.9568L19 7"></path>
+        </svg>
+      </div>
+
+      <!-- Judul -->
+      <h1 class="mt-6 text-center text-3xl font-semibold text-slate-900">Terima kasih atas pengajuan Anda!</h1>
+      <p class="mt-2 text-center text-slate-500">Pengajuan konsultasi Anda telah diterima dan sedang diproses</p>
+
+      <div class="mt-6 flex justify-center">
+        <div class="flex items-center justify-between gap-6 rounded-xl border border-slate-200 px-4 py-2.5 shadow-sm min-w-65">
+          <div>
+            <p class="mb-2 text-xs text-slate-400">Nomor pengajuan</p>
+            <p id="nomor" class="text-sm font-medium text-slate-900">CDK-0240-4555</p>
+          </div>
+          <button id="btn-salin" type="button" title="Salin nomor pengajuan" class="no-print rounded-lg bg-slate-100 p-2 text-slate-500 hover:bg-slate-200 transition">
+            <svg id="ikon-salin" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="9" y="9" width="11" height="11" rx="2" />
+              <path stroke-linecap="round" d="M5 15V6a2 2 0 012-2h9" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <p id="info-konfirmasi" class="mt-5 flex items-center justify-center gap-2 text-sm text-slate-600">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 6 9-6" />
+        </svg>
+        <span id="teks-konfirmasi">Petugas BKPSDM akan menghubungi Anda untuk konfirmasi jadwal</span>
+      </p>
+    </div>
+  </div>
+{% endblock %}

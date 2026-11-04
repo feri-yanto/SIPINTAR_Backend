@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import consult_submission_view
+from .views import ConsultSubmissionView, consult_success_page
 
 app_name = 'consult'
 urlpatterns = [
-  path('submission', view=consult_submission_view, name='submission'),
+  path('submission', view=ConsultSubmissionView.as_view(extra_context={'title': 'Pengajuan Konsultasi'}), name='submission'),
+  path('success', view=consult_success_page, name='success')
 ]
