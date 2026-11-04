@@ -14,6 +14,12 @@ dist/
 build/
 node_modules/
 
+asgi.py
+wsgi.py
+
+package-lock.json
+package.json
+
 .env
 .env.secret
 local_settings.py
