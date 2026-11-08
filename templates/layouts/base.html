@@ -27,6 +27,46 @@
 
     <div class="toast toast-top toast-end z-50">
       {% block inner_toast %}
+        {% for message in messages %}
+          <div class="my-toast relative w-70 h-auto p-3 rounded-xl bg-background shadow-xl border border-b-0 border-border overflow-hidden">
+            <div class="flex items-start gap-x-3 *:nth-2:flex-1">
+              <i class="hgi hgi-stroke hgi-rounded {% if message.tags == 'success' %}
+                  hgi-checkmark-circle-02
+                {% elif message.tags == 'warning' %}
+                  hgi-alert-01
+                {% elif message.tags == 'error' %}
+                  hgi-alert-circle
+                {% else %}
+                  hgi-information-circle
+                {% endif %} text-lg text-{{ message.tags }} mt-1">
+              </i>
+              <div class="flex flex-col">
+                <div class="inline-flex items-center gap-2">
+                  <i class="hgi hgi-stroke hgi-rounded hgi-ai-sparkles text-base text-inherit"></i>
+                  <span class="font-medium">
+                    {% if message.tags == 'success' %}
+                      Berhasil
+                    {% elif message.tags == 'warning' %}
+                      Kesalahan
+                    {% elif message.tags == 'error' %}
+                      Error
+                    {% else %}
+                      Informasi
+                    {% endif %}
+                  </span>
+                </div>
+                <p class="text-sm text-gray-500">{{ message }}</p>
+              </div>
+              <button type="button" class="close-toast"><i class="hgi hgi-stroke hgi-rounded hgi-cancel-01"></i></button>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-{{ message.tags }}"></div>
+          </div>
+        {% endfor %}
+      {% endblock %}
+    </div>
+
+    {% comment %} <div class="toast toast-top toast-end z-50">
+      {% block inner_toast %}
         {% if messages %}
           {% for message in messages %}
             <div class="my-toast w-75 min-h-10 flex flex-wrap gap-x-3 p-2 rounded-lg bg-background text-foreground shadow-lg border-0">
@@ -51,8 +91,10 @@
           {% endfor %}
         {% endif %}
       {% endblock %}
-    </div>
+    </div> {% endcomment %}
 
+    <script src="{% static 'js/jquery-4.0.0.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/preview-picture.js' %}"></script>
   </body>
 </html>
