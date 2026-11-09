@@ -7,12 +7,13 @@ from .models import AccountModel, ProfileAccountModel
 class RegisterAccountForms(forms.ModelForm):
   password = forms.CharField(min_length=8, required=True, widget=forms.PasswordInput(attrs={
     'placeholder': '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022',
-    'class': 'h-10 px-3 py-2 rounded-lg text-sm bg-transparent border border-border outline-0 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20'
+    'class': 'w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent'
   }))
 
   class Meta:
     model = AccountModel
     fields = ['username', 'email', 'password', 'role']
+
     error_messages = {
       'username': {
         'unique': _('NIP sudah terdaftar')
@@ -22,20 +23,17 @@ class RegisterAccountForms(forms.ModelForm):
         'invalid': _('Pastikan format email sudah benar')
       },
     }
+
     widgets = {
       'username': forms.NumberInput(attrs={
-        'autofocus': True,
         'placeholder': '2000xxxxxx',
-        'class': 'h-10 px-3 py-2 rounded-lg text-sm bg-transparent border border-border outline-0 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20'
+        'class': 'w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent'
       }),
       'email': forms.EmailInput(attrs={
         'placeholder': 'emailanda@contoh.com',
-        'class': 'h-10 px-3 py-2 rounded-lg text-sm bg-transparent border border-border outline-0 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20'
+        'class': 'w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent'
       }),
-      'role': forms.RadioSelect(attrs={
-        'hidden': True,
-        'class': 'peer'
-      })
+      'role': forms.RadioSelect(attrs={})
     }
 
   def clean_username(self):
@@ -77,24 +75,28 @@ class ProfileAccountForm(forms.ModelForm):
     fields = '__all__'
     exclude = ['account']
     widgets = {
-      'first_name': forms.TextInput(attrs={
-        'placeholder': 'John',
-        'class': 'h-10 px-3 py-2 rounded-lg text-sm bg-transparent border border-border outline-0 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20'
-      }),
-      'last_name': forms.TextInput(attrs={
-        'placeholder': 'Doe',
-        'class': 'h-10 px-3 py-2 rounded-lg text-sm bg-transparent border border-border outline-0 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20'
+      'full_name': forms.TextInput(attrs={
+        'placeholder': 'John Doe',
+        'class': 'w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent'
       }),
       'first_title': forms.TextInput(attrs={
         'placeholder': 'dr/ir/prof/...',
-        'class': 'h-10 px-3 py-2 rounded-lg text-sm bg-transparent border border-border outline-0 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20'
+        'class': 'w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent'
       }),
       'last_title': forms.TextInput(attrs={
         'placeholder': 'SE/S.Pd/S.Kom/S.Sos/...',
-        'class': 'h-10 px-3 py-2 rounded-lg text-sm bg-transparent border border-border outline-0 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20'
+        'class': 'w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent'
       }),
       'position': forms.TextInput(attrs={
         'placeholder': 'Analis SDM Aparatur Ahli Muda',
-        'class': 'h-10 px-3 py-2 rounded-lg text-sm bg-transparent border border-border outline-0 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20'
-      })
+        'class': 'w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent'
+      }),
+      'level': forms.Select(attrs={
+        'class': 'select w-full outline-none',
+      }),
+      'birthday': forms.DateInput(attrs={
+        'type': 'date',
+        'class': 'w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent'
+      }),
+      'gender': forms.RadioSelect(),
     }

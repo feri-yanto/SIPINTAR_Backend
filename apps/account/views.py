@@ -27,7 +27,7 @@ class ListedAccount(ListView):
 def create_new_account(request):
   if request.method == 'POST':
     account_form = RegisterAccountForms(data=request.POST)
-    profile_form = ProfileAccountForm(data=request.POST)
+    profile_form = ProfileAccountForm(data=request.POST, files=request.FILES)
 
     if account_form.is_valid() and profile_form.is_valid():
       try:
@@ -54,7 +54,7 @@ def create_new_account(request):
   })
 
 
-class UpdateProfileView(SuccessMessageMixin, UpdateView):
+class UpdateProfileAccount(SuccessMessageMixin, UpdateView):
   http_method_names = ['get', 'post']
   model = ProfileAccountModel
   form_class = ProfileAccountForm

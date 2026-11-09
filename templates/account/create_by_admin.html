@@ -35,7 +35,7 @@
         <div class="col-span-12 md:col-span-4 xl:col-span-3 xl:order-last self-end">
           <div class="max-w-70 min-h-40 mx-auto flex flex-col items-center justify-center gap-y-5 p-3 rounded-xl text-sm text-center bg-background border border-dashed border-border-field overflow-hidden">
             <p class="text-sm text-gray-400">Tambahkan foto agar profil Anda lebih mudah dikenali.</p>
-            <label for="avatar-input" class="group relative size-25 rounded-full cursor-pointer transition">
+            <label for="id_picture" class="group relative size-25 rounded-full cursor-pointer transition">
               <!-- Cincin gradien -->
               <span class="absolute -inset-1 rounded-full bg-conic-180 from-blue-500 via-indigo-500 to-fuchsia-500 opacity-70 blur-sm"></span>
               <!-- Cincin gradien -->
@@ -70,11 +70,11 @@
               </span>
               <!-- Badge plus -->
 
-              <input id="avatar-input" type="file" accept="image/png,image/jpeg,image/svg" hidden class="sr-only" onchange="pictureUploaded(event, 'preview', 'placeholder-profile')" />
+              <input id="id_picture" name="picture" type="file" accept="image/png,image/jpeg,image/svg" hidden class="sr-only" onchange="pictureUploaded(event, 'preview', 'placeholder-profile')" />
             </label>
             <div>
               <p class="text-sm text-gray-600">
-                <label for="avatar-input" class="font-semibold text-blue-500 cursor-pointer">Klik</label> untuk pilih foto
+                <label for="id_picture" class="font-semibold text-blue-500 cursor-pointer">Klik</label> untuk pilih foto
               </p>
               <p class="mt-1 text-xs text-gray-400">JPG, PNG, atau SVG &middot; Maks. 2 MB</p>
             </div>
@@ -92,28 +92,44 @@
         <div class="col-span-12 md:col-span-8 xl:col-span-5 self-start flex flex-wrap gap-3">
           <!-- NIP -->
           <div class="flex-1 basis-45 text-sm">
-            <label for="id_username" class="font-medium">NIP</label>
-            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">
-              <input type="number" name="username" id="id_username" autofocus placeholder="2000xxxxxx" class="w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent" />
-            </div>
+            <label for="{{ account_form.username.id_for_label }}" class="font-medium">NIP</label>
+            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">{{ account_form.username }}</div>
+
+            {% if account_form.username.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in account_form.username.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- NIP -->
 
           <!-- Email -->
           <div class="flex-1 basis-45 text-sm">
-            <label for="id_email" class="font-medium">Email</label>
-            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">
-              <input type="email" name="username" id="id_email" autocomplete="email" placeholder="emailanda@contoh.com" class="w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent" />
-            </div>
+            <label for="{{ account_form.email.id_for_label }}" class="font-medium">Email</label>
+            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">{{ account_form.email }}</div>
+            {% if account_form.email.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in account_form.email.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- Email -->
 
           <!-- Password -->
           <div class="basis-full text-sm">
-            <label for="id_password" class="font-medium">Sandi</label>
-            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">
-              <input type="password" name="username" id="id_password" autocomplete="new-password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" class="w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent" />
-            </div>
+            <label for="{{ account_form.password.id_for_label }}" class="font-medium">Sandi</label>
+            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">{{ account_form.password }}</div>
+            {% if account_form.password.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in account_form.password.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- Password -->
 
@@ -121,19 +137,20 @@
           <div class="basis-full text-sm">
             <legend class="font-medium">Role Akun</legend>
             <div class="mt-2 flex max-sm:flex-col sm:items-center rounded-lg border [&,&>*]:border-border-field max-sm:*:not-last:border-b sm:*:not-last:border-r">
-              <label for="id_role_1" class="flex-1 h-10 inline-flex items-center gap-3 px-3 py-2 *:nth-2:flex-1">
-                <i class="hgi hgi-stroke hgi-rounded hgi-user-cog"></i>
-                <span>Admin</span><input type="radio" name="role" id="id_role_1" />
-              </label>
-              <label for="id_role_2" class="flex-1 h-10 inline-flex items-center gap-3 px-3 py-2 *:nth-2:flex-1">
-                <i class="hgi hgi-stroke hgi-rounded hgi-hierarchy"></i>
-                <span>Kabid/Kasubbag</span><input type="radio" name="role" id="id_role_2" />
-              </label>
-              <label for="id_role_3" class="flex-1 h-10 inline-flex items-center gap-3 px-3 py-2 *:nth-2:flex-1">
-                <i class="hgi hgi-stroke hgi-rounded hgi-user-group-03"></i>
-                <span>Staf</span><input type="radio" name="role" id="id_role_3" />
-              </label>
+              {% for radio in account_form.role %}
+                <label for="{{ radio.id_for_label }}" class="flex-1 h-10 inline-flex items-center gap-3 px-3 py-2 *:nth-2:flex-1">
+                  <i class="hgi hgi-stroke hgi-rounded hgi-user-cog"></i>
+                  <span>{{ radio.choice_label|title }}</span>{{ radio.tag }}
+                </label>
+              {% endfor %}
             </div>
+            {% if account_form.role.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in account_form.role.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
             <!-- Role -->
           </div>
         </div>
@@ -152,55 +169,85 @@
         <div class="col-span-12 lg:col-span-8 flex flex-wrap gap-3">
           <!-- Full Name -->
           <div class="flex-1 basis-full text-sm">
-            <label for="id_fullname" class="font-medium">Nama Lengkap</label>
-            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">
-              <input type="text" name="fullname" id="id_fullname" placeholder="John Doe" class="w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent" />
-            </div>
+            <label for="{{ profile_form.full_name.id_for_label }}" class="font-medium">Nama Lengkap</label>
+            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">{{ profile_form.full_name }}</div>
+            {% if profile_form.full_name.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in profile_form.full_name.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- Full Name -->
 
           <!-- First Title -->
           <div class="flex-1 basis-60 text-sm">
-            <label for="id_first_title" class="font-medium">Gelar Depan</label>
-            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">
-              <input type="text" name="first_title" id="id_first_title" placeholder="ir/dr/prof/dll" class="w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent" />
-            </div>
+            <label for="{{ profile_form.first_title.id_for_label }}" class="font-medium">Gelar Depan</label>
+            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">{{ profile_form.first_title }}</div>
+            {% if profile_form.first_title.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in profile_form.first_title.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- First Title -->
 
           <!-- Last Title -->
           <div class="flex-1 basis-60 text-sm">
-            <label for="id_last_title" class="font-medium">Gelar Belakang</label>
-            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">
-              <input type="text" name="last_title" id="id_last_title" placeholder="S.Kom/SE/S.Sos/dll" class="w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent" />
-            </div>
+            <label for="{{ profile_form.last_title.id_for_label }}" class="font-medium">Gelar Belakang</label>
+            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">{{ profile_form.last_title }}</div>
+            {% if profile_form.last_title.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in profile_form.last_title.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- Last Title -->
 
           <!-- level -->
           <div class="flex-1 basis-60 text-sm">
-            <label for="id_level" class="font-medium">Golongan</label>
-            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">
-              <input type="text" name="level" id="id_level" placeholder="III/a" class="w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent" />
-            </div>
+            <label for="{{ profile_form.level.id_for_label }}" class="font-medium">Golongan</label>
+            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">{{ profile_form.level }}</div>
+            {% if profile_form.level.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in profile_form.level.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- level -->
 
           <!-- Position -->
           <div class="flex-1 basis-60 text-sm">
-            <label for="id_position" class="font-medium">Jabatan</label>
-            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">
-              <input type="text" name="position" id="id_position" placeholder="Analis SDM Aparatur" class="w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent" />
-            </div>
+            <label for="{{ profile_form.position.id_for_label }}" class="font-medium">Jabatan</label>
+            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">{{ profile_form.position }}</div>
+            {% if profile_form.position.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in profile_form.position.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- Position -->
 
           <!-- Birthday -->
           <div class="flex-1 basis-60 text-sm">
-            <label for="id_birthday" class="font-medium">Tanggal Lahir</label>
-            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">
-              <input type="date" name="birthday" id="id_birthday" placeholder="Analis SDM Aparatur" class="w-full min-h-10 px-3 py-2 border-none outline-none bg-transparent" />
-            </div>
+            <label for="{{ profile_form.birthday.id_for_label }}" class="font-medium">Tanggal Lahir</label>
+            <div class="mt-2 rounded-lg bg-background border border-border-field ring-3 ring-transparent overflow-hidden transition-colors has-focus-visible:border-blue-500 has-focus-visible:ring-blue-500/20 has-[input[aria-invalid]]:border-red-400 has-[input[aria-invalid]]:ring-red-400/20">{{ profile_form.birthday }}</div>
+            {% if profile_form.birthday.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in profile_form.birthday.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- Birthday -->
 
@@ -208,15 +255,20 @@
           <div class="flex-1 basis-60 text-sm">
             <legend class="font-medium">Jenis Kelamin</legend>
             <div class="mt-2">
-              <div class="flex items-center gap-x-3">
-                <input type="radio" name="radio-4" id="id_radio_1" checked="checked" />
-                <label for="id_radio_1">Laki-Laki</label>
-              </div>
-              <div class="flex items-center gap-x-3">
-                <input type="radio" name="radio-4" id="id_radio_2" />
-                <label for="id_radio_2">Perempuan</label>
-              </div>
+              {% for radio in profile_form.gender %}
+                <div class="flex items-center gap-x-3">
+                  {{ radio.tag }}
+                  <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                </div>
+              {% endfor %}
             </div>
+            {% if profile_form.gender.errors %}
+              <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+                {% for error in profile_form.gender.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
           <!-- Gender -->
         </div>
@@ -225,16 +277,16 @@
 
       <!-- Signature input -->
       <div class="grid grid-cols-12 auto-rows-min gap-5 p-5">
-        <!-- Legend and description-->
+        <!-- Legend and description -->
         <div class="col-span-12 sm:col-span-4">
           <legend class="font-medium">Data Signature</legend>
           <p class="text-sm text-gray-400">Tanda tangan pengguna</p>
         </div>
-        <!-- Legend and description-->
+        <!-- Legend and description -->
 
         <div class="col-span-12 sm:col-span-8">
           <!-- Signature -->
-          <div class="h-35 lg:h-40 flex flex-col items-center justify-center gap-y-3 p-3 rounded-lg text-sm bg-background border border-dashed border-border-field">
+          <div class="h-35 lg:h-40 flex flex-col items-center justify-center gap-y-2 p-3 rounded-lg text-sm bg-background border border-dashed border-border-field">
             <div class="h-20 w-auto flex flex-col items-center justify-center aspect-4/3">
               <img id="preview-sign" alt="Pratinjau signature" class="hidden size-full object-cover" />
               <svg id="placeholder-sign" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" class="size-13 text-gray-300">
@@ -256,8 +308,8 @@
       <!-- Signature input -->
 
       <div class="flex items-center justify-end gap-3 p-5">
-        <button type="reset" class="min-h-9 px-4 py-2 rounded-lg bg-transparent text-sm border border-border-field hover:bg-gray-100">Reset</button>
-        <button type="submit" class="min-h-9 px-4 py-2 rounded-lg bg-blue-500 text-sm text-white border border-transparent hover:bg-blue-600">Simpan</button>
+        <button type="reset" class="min-h-9 px-4 py-2 rounded-lg bg-transparent text-sm border border-border-field hover:bg-gray-100 cursor-pointer">Reset</button>
+        <button type="submit" class="min-h-9 px-4 py-2 rounded-lg bg-blue-500 text-sm text-white border border-transparent hover:bg-blue-600 cursor-pointer">Simpan</button>
       </div>
     </form>
     <!-- Form for create account by admin -->

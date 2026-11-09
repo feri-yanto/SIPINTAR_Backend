@@ -13,6 +13,7 @@ ENV/
 dist/
 build/
 node_modules/
+media/
 
 .env
 .env.secret
