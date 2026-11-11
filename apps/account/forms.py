@@ -74,6 +74,17 @@ class ProfileAccountForm(forms.ModelForm):
     model = ProfileAccountModel
     fields = '__all__'
     exclude = ['account']
+
+    error_messages = {
+      'picture': {
+        'invalid_image': _('Pastikan file berupa gambar'),
+      },
+      'signature': {
+        'required': _('Signature wajib diunggah'),
+        'invalid_image': _('Pastikan file berupa gambar'),
+      }
+    }
+
     widgets = {
       'full_name': forms.TextInput(attrs={
         'placeholder': 'John Doe',

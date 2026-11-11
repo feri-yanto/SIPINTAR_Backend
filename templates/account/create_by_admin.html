@@ -70,7 +70,7 @@
               </span>
               <!-- Badge plus -->
 
-              <input id="id_picture" name="picture" type="file" accept="image/png,image/jpeg,image/svg" hidden class="sr-only" onchange="pictureUploaded(event, 'preview', 'placeholder-profile')" />
+              <input id="id_picture" name="picture" type="file" accept=".jpg, .jpeg, .png, .svg, image/jpeg, image/png, image/svg+xml" hidden class="sr-only" onchange="pictureUploaded(event, 'preview', 'placeholder-profile')" />
             </label>
             <div>
               <p class="text-sm text-gray-600">
@@ -79,6 +79,13 @@
               <p class="mt-1 text-xs text-gray-400">JPG, PNG, atau SVG &middot; Maks. 2 MB</p>
             </div>
           </div>
+          {% if profile_form.picture.errors %}
+            <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+              {% for error in profile_form.picture.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </div>
         <!-- Upload photo -->
 
@@ -300,8 +307,15 @@
               </p>
               <p class="text-xs text-gray-400">Wajib berekstensi .PNG</p>
             </div>
-            <input type="file" name="signature" id="id_signature" hidden onchange="pictureUploaded(event, 'preview-sign', 'placeholder-sign')" />
+            <input type="file" accept=".png" name="signature" id="id_signature" hidden onchange="pictureUploaded(event, 'preview-sign', 'placeholder-sign')" />
           </div>
+          {% if profile_form.signature.errors %}
+            <ul class="list-disc list-inside mt-1 text-xs text-error font-medium">
+              {% for error in profile_form.signature.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
           <!-- Signature -->
         </div>
       </div>

@@ -2,6 +2,7 @@ import os
 import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import FileExtensionValidator
 from django.utils.translation import gettext_lazy as _
 from django.utils.deconstruct import deconstructible
 
@@ -88,8 +89,12 @@ class ProfileAccountModel(models.Model):
   position = models.CharField(verbose_name=_('position'), max_length=100)
   birthday = models.DateField(verbose_name=_('date birthday'))
   gender = models.CharField(verbose_name=_('gender'), max_length=10, choices=GENDER, default='L')
-  picture = models.ImageField(verbose_name=_('picture profile'), null=True, blank=True, upload_to=UploadToPath('images/user/profile/'))
-  signature = models.ImageField(verbose_name=_('signature'), upload_to=UploadToPath('images/user/signature/'))
+  picture = models.ImageField(verbose_name=_('picture profile'), null=True, blank=True, upload_to=UploadToPath('images/user/profile/'), validators=[
+    FileExtensionValidator(allowed_extensions=['jpg', 'png', 'svg'], message=_('Format gambar tidak sesuai, pastikan berformat .jpg, .png, .svg'))
+  ])
+  signature = models.ImageField(verbose_name=_('signature'), upload_to=UploadToPath('images/user/signature/'), validators=[
+    FileExtensionValidator(allowed_extensions=['png'], message=_('Format gambar tidak sesuai, pastikan berformat .png'))
+  ])
 
 
   class Meta:

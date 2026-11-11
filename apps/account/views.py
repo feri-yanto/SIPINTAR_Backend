@@ -4,7 +4,7 @@ from django.db import transaction
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.list import ListView
 
 from .models import AccountModel, ProfileAccountModel
@@ -15,7 +15,7 @@ class ListedAccount(ListView):
   http_method_names = ['get']
   model = AccountModel
   template_name = 'account/list_account.html'
-  paginate_by = 4
+  paginate_by = 2
 
   def get_queryset(self):
     query = super().get_queryset()
@@ -38,7 +38,7 @@ def create_new_account(request):
           profile.account = account
           profile_form.save()
 
-        messages.success(request, message='Akun berhasil disimpan')
+        messages.success(request, message=f'Selamat, akun {profile.full_name} berhasil dibuat')
         return redirect(to=reverse(viewname='account:list'))
       except Exception:
         messages.error(request, message='Terjadi kesalahan saat menyimpan data, mohon coba lagi')
@@ -60,6 +60,15 @@ class UpdateProfileAccount(SuccessMessageMixin, UpdateView):
   form_class = ProfileAccountForm
   template_name = 'account/edit_account.html'
   success_message = 'Data berhasil diubah & disimpan'
+
+  def get_success_url(self) -> str:
+    return reverse(viewname=('account:list'))
+
+
+class DeleteAccount(SuccessMessageMixin, DeleteView):
+  http_method_names = ['post']
+  model = AccountModel
+  success_message = 'Akun berhasil dihapus'
 
   def get_success_url(self) -> str:
     return reverse(viewname=('account:list'))

@@ -25,6 +25,21 @@
       </div>
     {% endblock %}
 
+    <dialog id="modal_delete" class="modal">
+      <div class="modal-box max-w-sm">
+        {% block modal_content %}
+          <h3 class="text-lg font-bold">Hello!</h3>
+          <p class="py-4">Press ESC key or click the button below to close</p>
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        {% endblock %}
+      </div>
+    </dialog>
+
     <div class="toast toast-top toast-end z-50">
       {% block inner_toast %}
         {% for message in messages %}
@@ -68,5 +83,6 @@
     <script src="{% static 'js/jquery-4.0.0.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/preview-picture.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
   </body>
 </html>

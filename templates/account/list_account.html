@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block content %}
-  <div class="max-w-300 mx-auto">
+  <div class="max-w-6xl mx-auto">
     <!-- Title & breadcumb -->
     <div class="flex flex-wrap items-center justify-between mb-5">
       <h1 class="basis-xs text-2xl font-semibold">Akun Pegawai</h1>
+
       <div class="breadcrumbs text-sm">
         <ul>
           <li>
@@ -18,47 +19,81 @@
     </div>
     <!-- Title & breadcumb -->
 
-    <div class="p-5 rounded-xl border border-border bg-background xl:mx-auto">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-semibold">Akun Pegawai</h3>
+    <div class="rounded-2xl bg-background border border-border overflow-hidden *:not-last:border-b *:border-border">
+      <!-- Title & filter -->
+      <div class="flex items-center justify-between p-5 text-lg font-semibold">
+        <h3>Akun Pegawai</h3>
 
-        <button type="button" class="btn btn-outline rounded-lg border border-border outline-none hover:bg-base-200">
-          <svg class="size-5" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14.653 5.905a2.57 2.57 0 00-5.141 0m5.141 0a2.57 2.57 0 01-5.141 0m5.141 0h3.055m-8.196 0h-7.22m3.055 8.192a2.57 2.57 0 015.141 0m-5.141 0a2.57 2.57 0 005.141 0m-5.141 0H2.292m8.196 0h7.22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>Filter
+        <button type="button" class="inline-flex items-center gap-x-2 px-3 py-2 text-sm rounded-lg border border-border-field bg-transparent hover:bg-gray-100 transition-colors">
+          <i class="hgi hgi-stroke hgi-rounded hgi-filter-horizontal text-base"></i>
+          <span>Filter</span>
         </button>
       </div>
+      <!-- Title & filter -->
 
-      <div class="overflow-x-auto overflow-y-scroll">
+      <!-- Table list users -->
+      <div class="overflow-auto">
         <table class="w-full">
-          <thead class="border-y border-gray-100 bg-gray-50">
+          <thead class="bg-gray-50 border-b border-border">
             <tr>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400">Pegawai</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400">Jabatan/Gol</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400">Role</th>
-              <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400">Aksi</th>
+              <th class="px-5 py-3 text-start text-xs font-medium text-gray-500">Pegawai</th>
+              <th class="px-5 py-3 text-start text-xs font-medium text-gray-500">Jabatan/Gol</th>
+              <th class="px-5 py-3 text-start text-xs font-medium text-gray-500">Role</th>
+              <th class="px-5 py-3 text-start text-xs font-medium text-gray-500">Aksi</th>
             </tr>
           </thead>
           <tbody>
+            {% for account in object_list %}
+              <tr class="bg-background hover:bg-gray-100/50 transition-colors">
+                <td class="px-5 py-4 text-start sm:px-6">
+                  <div class="flex items-center gap-3">
+                    <div class="size-10 overflow-hidden rounded-full">
+                      <img src="https://img.daisyui.com/images/profile/demo/4@94.webp" alt="Lindsey Curtis" class="h-full w-full object-cover" />
+                    </div>
+                    <div>
+                      <span class="block text-sm font-medium">{{ account.profile.full_name|upper }}</span>
+                      <span class="block text-xs text-gray-500">{{ account.username }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4">
+                  <div class="flex w-full items-center gap-5">
+                    <div>
+                      <p class="mb-0.5 truncate text-sm font-medium">{{ account.profile.position|title }}</p>
+                      <span class="text-xs text-gray-500">{{ account.profile.get_level_display }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-start text-sm text-gray-500">
+                  <span class="inline-flex items-center justify-center px-2 py-0.5 rounded-lg text-xs font-medium bg-green-50 text-green-600">{{ account.get_role_display }}</span>
+                </td>
+                <td class="px-5 py-4 text-start text-sm text-gray-500">
+                  <div class="flex">
+                    <a href=""><i class="hgi hgi-stroke hgi-rounded hgi-edit-02 mr-2 text-blue-500 font-medium"></i></a>
+                    <button data-id="{{ account.id }}" data-name="{{ account.profile.full_name }}" type="button" class="delete-button-in-table" onclick="modal_delete.showModal()"><i class="hgi hgi-stroke hgi-rounded hgi-delete-02 text-error font-medium cursor-pointer"></i></button>
+                  </div>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="4" class="px-4 py-2 text-center">
+                  <span>Belum ada data</span>
+                </td>
+              </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
-      <div class="mt-4">
+      <!-- Table list users -->
+
+      <div class="p-5">
         <ul class="flex items-center gap-x-2">
           <!-- Button Prev -->
           <li>
             {% if page_obj.has_previous %}
-              <a href="?page={{ page_obj.previous_page_number }}" class="size-9 inline-flex items-center justify-center rounded-lg bg-transparent border border-border [&>svg]:size-5">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M15 18C15 18 9.00001 13.5811 9 12C8.99999 10.4188 15 6 15 6"></path>
-                </svg>
-              </a>
+              <a href="?page={{ page_obj.previous_page_number }}" class="size-9 inline-flex items-center justify-center rounded-lg bg-transparent border border-border"><i class="hgi hgi-stroke hgi-rounded hgi-chevron-left text-lg"></i></a>
             {% else %}
-              <button disabled="disabled" class="size-9 inline-flex items-center justify-center rounded-lg bg-transparent border border-border [&>svg]:size-5 disabled:border-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M15 18C15 18 9.00001 13.5811 9 12C8.99999 10.4188 15 6 15 6"></path>
-                </svg>
-              </button>
+              <button disabled="disabled" class="size-9 inline-flex items-center justify-center rounded-lg bg-transparent border border-border disabled:border-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"><i class="hgi hgi-stroke hgi-rounded hgi-chevron-left text-lg"></i></button>
             {% endif %}
           </li>
           <!-- End Button Prev -->
@@ -74,22 +109,35 @@
           <!-- Button Next -->
           <li>
             {% if page_obj.has_next %}
-              <a href="" class="size-9 inline-flex items-center justify-center rounded-lg bg-transparent border border-border [&:last-child_>_svg]:rotate-180 [&>svg]:size-5">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M15 18C15 18 9.00001 13.5811 9 12C8.99999 10.4188 15 6 15 6"></path>
-                </svg>
-              </a>
+              <a href="?page={{ page_obj.next_page_number }}" class="size-9 inline-flex items-center justify-center rounded-lg bg-transparent border border-border"><i class="hgi hgi-stroke hgi-rounded hgi-chevron-right text-lg"></i></a>
             {% else %}
-              <button disabled="disabled" class="size-9 inline-flex items-center justify-center rounded-lg bg-transparent border border-border [&:last-child_>_svg]:rotate-180 [&>svg]:size-5 disabled:border-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M15 18C15 18 9.00001 13.5811 9 12C8.99999 10.4188 15 6 15 6"></path>
-                </svg>
-              </button>
+              <button disabled="disabled" class="size-9 inline-flex items-center justify-center rounded-lg bg-transparent border border-border disabled:border-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"><i class="hgi hgi-stroke hgi-rounded hgi-chevron-right text-lg"></i></button>
             {% endif %}
           </li>
           <!-- End Button Next -->
         </ul>
       </div>
     </div>
+  </div>
+{% endblock %}
+
+{% block modal_content %}
+  <div class="text-center *:not-last:mb-2">
+    <div class="size-10 inline-flex items-center justify-center rounded-lg bg-yellow-500/20">
+      <i class="hgi hgi-stroke hgi-rounded hgi-alert-02 text-lg text-yellow-500"></i>
+    </div>
+    <p class="text-gray-700">
+      Apakah anda yakin ingin menghapus akun <span class="name-placement font-semibold underline">FERIYANTO</span>? tindakan ini tidak dapat dibatalkan
+    </p>
+  </div>
+  <div class="modal-action justify-center">
+    <form method="dialog">
+      <!-- if there is a button in form, it will close the modal -->
+      <button class="btn btn-outline rounded-lg border border-border-field">Batal</button>
+    </form>
+    <form id="form-delete-account" action="" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-active bg-yellow-500 text-white border-0 outline-0 rounded-lg">Ya, lanjutkan</button>
+    </form>
   </div>
 {% endblock %}
